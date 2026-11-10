@@ -55,6 +55,14 @@ function tickOil(now) {
 
 function updateOil() {
   oilTarget = getOilTarget();
+
+  // Lenis maakt het scrollen met muis en trackpad al vloeiend; twee keer naijlen voelt traag.
+  if (document.documentElement.classList.contains("lenis") && hasMouse) {
+    oilCurrent = oilTarget;
+    renderOil(oilCurrent);
+    return;
+  }
+
   if (oilFrame === null) {
     oilLastTime = performance.now();
     oilFrame = requestAnimationFrame(tickOil);
@@ -131,3 +139,216 @@ function updateHeader() {
 window.addEventListener("scroll", updateHeader, { passive: true });
 // Met de toetsenbordfocus in de header moet hij zichtbaar zijn.
 siteHeader.addEventListener("focusin", () => siteHeader.classList.remove("is-hidden"));
+
+// Banner: de foto opent als een venster en de koppen en tekst schuiven binnen, gekoppeld aan het scrollen.
+// De CSS toont alles al volledig, dus zonder GSAP of bij minder beweging blijft de banner statisch.
+if (!reduceMotion && window.gsap && window.ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const BANNER_LINE_TRAVEL = 0.22; // deel van de schermbreedte dat de koppen afleggen
+  const bannerLineOffset = () => window.innerWidth * BANNER_LINE_TRAVEL;
+
+  gsap
+    .timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: ".banner",
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    })
+    .fromTo(
+      ".banner-media",
+      { clipPath: "inset(14% 20% 14% 20%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 1 },
+      0
+    )
+    .fromTo(".banner-image", { scale: 1.3 }, { scale: 1, duration: 1 }, 0)
+    // De teksten schuiven pas in het tweede deel binnen, als de foto al grotendeels open is.
+    .fromTo(
+      ".banner-line:first-child",
+      { x: () => -bannerLineOffset(), opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.55 },
+      0.45
+    )
+    // De tekst legt de helft van de afstand af, zodat hij binnen het openende venster blijft.
+    .fromTo(
+      ".banner-copy",
+      { x: () => -bannerLineOffset() / 2, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.55 },
+      0.45
+    )
+    .fromTo(
+      ".banner-line-gold",
+      { x: bannerLineOffset, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.55 },
+      0.45
+    );
+
+  // De fonts veranderen de hoogte van de pagina, dus daarna de scrollposities opnieuw meten.
+  document.fonts.ready.then(() => ScrollTrigger.refresh());
+}
+
+// Smooth scrolling op de hele website. Touchscreens houden het natuurlijke scrollen van het apparaat.
+if (!reduceMotion && window.Lenis) {
+  const lenis = new Lenis({ lerp: 0.1, anchors: true });
+
+  if (window.gsap) {
+    if (window.ScrollTrigger) lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const runLenis = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(runLenis);
+    };
+    requestAnimationFrame(runLenis);
+  }
+} else if (!reduceMotion) {
+  // Lenis niet geladen: dan glijden in elk geval de ankerlinks.
+  document.documentElement.style.scrollBehavior = "smooth";
+}
+
+// Productrij: met de muis horizontaal slepen. Touchscreens en trackpads scrollen vanzelf.
+const products = document.querySelector(".products");
+const productStrip = document.querySelector(".product-grid");
+const DRAG_THRESHOLD = 6; // pas vanaf deze afstand telt een klik als slepen
+let isStripDown = false;
+let hasStripDragged = false;
+let stripStartX = 0;
+let stripStartScroll = 0;
+
+productStrip.addEventListener("pointerdown", (event) => {
+  if (event.pointerType !== "mouse" || event.button !== 0) return;
+  if (products.classList.contains("is-pinned")) return;
+  isStripDown = true;
+  hasStripDragged = false;
+  stripStartX = event.clientX;
+  stripStartScroll = productStrip.scrollLeft;
+});
+
+window.addEventListener("pointermove", (event) => {
+  if (!isStripDown) return;
+  const distance = event.clientX - stripStartX;
+  if (!hasStripDragged && Math.abs(distance) < DRAG_THRESHOLD) return;
+
+  hasStripDragged = true;
+  productStrip.classList.add("is-dragging");
+  productStrip.scrollLeft = stripStartScroll - distance;
+});
+
+window.addEventListener("pointerup", () => {
+  isStripDown = false;
+  productStrip.classList.remove("is-dragging");
+});
+
+// Na het slepen mag de losgelaten kaart niet als klik tellen.
+productStrip.addEventListener(
+  "click",
+  (event) => {
+    if (!hasStripDragged) return;
+    event.preventDefault();
+    event.stopPropagation();
+    hasStripDragged = false;
+  },
+  true
+);
+
+productStrip.addEventListener("dragstart", (event) => event.preventDefault());
+
+// Producten: de sectie staat vast terwijl verticaal scrollen de rij van links naar rechts doorloopt.
+if (!reduceMotion && window.gsap && window.ScrollTrigger) {
+  const productStage = document.querySelector(".products-stage");
+  const PRODUCT_SCROLL_PACE = 1.5; // aantal px scrollen per px dat de rij opzij beweegt
+
+  const productTravel = () => Math.max(0, productStrip.offsetWidth - productStage.clientWidth);
+  const productPinDistance = () => productTravel() * PRODUCT_SCROLL_PACE;
+  const setProductsHeight = () => {
+    products.style.height = `${productStage.offsetHeight + productPinDistance()}px`;
+  };
+
+  // Op te lage schermen, zoals een liggende telefoon, past de sectie niet en blijft het de gewone rij.
+  gsap.matchMedia().add("(min-width: 1025px), (min-height: 601px)", () => {
+    products.classList.add("is-pinned");
+    setProductsHeight();
+    ScrollTrigger.addEventListener("refreshInit", setProductsHeight);
+
+    const productScroll = gsap.to(productStrip, {
+      x: () => -productTravel(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: products,
+        start: "top top",
+        end: () => `+=${productPinDistance()}`,
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // Met de Tab-toets naar een kaart die buiten beeld staat: scrol de pagina daarheen.
+    const showFocusedCard = (event) => {
+      const travel = productTravel();
+      if (!travel || !event.target.matches(":focus-visible")) return;
+
+      const cardLeft = event.target.closest(".product").getBoundingClientRect().left;
+      const offset = cardLeft - productStrip.getBoundingClientRect().left;
+      const startOffset = parseFloat(getComputedStyle(productStrip).paddingLeft);
+      const { start, end } = productScroll.scrollTrigger;
+      window.scrollTo(0, start + clamp((offset - startOffset) / travel) * (end - start));
+    };
+    productStrip.addEventListener("focusin", showFocusedCard);
+
+    return () => {
+      productStrip.removeEventListener("focusin", showFocusedCard);
+      ScrollTrigger.removeEventListener("refreshInit", setProductsHeight);
+      products.classList.remove("is-pinned");
+      products.style.height = "";
+    };
+  });
+
+  ScrollTrigger.refresh();
+}
+
+// Productfilter: toont per tab de juiste producten en nummert de zichtbare producten opnieuw.
+const productCards = [...document.querySelectorAll(".product")];
+const filterButtons = document.querySelectorAll(".tabs button");
+
+function filterProducts(activeButton) {
+  const filter = activeButton.dataset.filter;
+  let visibleCount = 0;
+
+  filterButtons.forEach((button) => {
+    button.classList.toggle("is-active", button === activeButton);
+    button.setAttribute("aria-pressed", button === activeButton);
+  });
+
+  productCards.forEach((card) => {
+    const isVisible = filter === "alle" || card.dataset.category.split(" ").includes(filter);
+    card.hidden = !isVisible;
+    if (isVisible) {
+      visibleCount += 1;
+      card.querySelector(".product-number").textContent = String(visibleCount).padStart(2, "0");
+    }
+  });
+
+  productStrip.scrollLeft = 0;
+
+  // De rij is nu korter of langer: terug naar het eerste product en de scrollafstand opnieuw meten.
+  if (products.classList.contains("is-pinned")) {
+    const sectionTop = products.getBoundingClientRect().top + window.scrollY;
+    if (window.scrollY > sectionTop) window.scrollTo(0, sectionTop);
+    ScrollTrigger.refresh();
+  }
+
+  if (!reduceMotion) {
+    productStrip.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350, easing: "ease" });
+  }
+}
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!button.classList.contains("is-active")) filterProducts(button);
+  });
+});

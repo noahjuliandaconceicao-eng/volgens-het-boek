@@ -66,8 +66,6 @@
       </div>
     </div>
 
-    <p class="hero-scroll">Scroll</p>
-
     <div class="hero-caption">
       <span class="hero-caption-number">N° 01</span>
       <p><strong>De collectie</strong>Zes formules, één standaard</p>
@@ -77,67 +75,93 @@
   <main>
     <!-- Sectie 2: vind jouw favoriet -->
     <section class="products" id="producten">
-      <div class="section-head">
-        <h2 class="display">Vind jouw favoriet</h2>
-        <a class="see-all" href="#">Bekijk alles <span aria-hidden="true">&rsaquo;</span></a>
-      </div>
+      <div class="products-stage">
+        <div class="section-head">
+          <h2 class="display">Vind jouw favoriet</h2>
+          <a class="see-all" href="#">Bekijk alles <span aria-hidden="true">&rsaquo;</span></a>
+        </div>
 
-      <nav class="tabs" aria-label="Productcategorieën">
-        <a class="is-active" href="#">Alle producten</a>
-        <a href="#">Haarverzorging</a>
-        <a href="#">Styling</a>
-        <a href="#">Baardverzorging</a>
-      </nav>
+        <nav class="tabs" aria-label="Productcategorieën">
+          <button class="is-active" type="button" data-filter="alle" aria-pressed="true">Alle producten</button>
+          <button type="button" data-filter="haar" aria-pressed="false">Haarverzorging</button>
+          <button type="button" data-filter="styling" aria-pressed="false">Styling</button>
+          <button type="button" data-filter="baard" aria-pressed="false">Baardverzorging</button>
+        </nav>
 
-      <div class="product-grid">
-        <article class="product">
-          <div class="product-media">
-            <a class="product-link" href="#"><img class="img-hybrid" src="foto's/hybrid_pomade1.png" alt="Hybrid Pomade" loading="lazy"><img class="product-hover hover-hybrid" src="foto's/Hybrid_Pomade.png" alt="" loading="lazy"></a>
-            <button class="product-add" type="button" aria-label="Toevoegen aan mand: Hybrid Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
-          </div>
-          <div class="product-info">
-            <span class="product-number">01</span>
-            <h3 class="product-name">Hybrid Pomade</h3>
-            <p class="product-price">€ [prijs]</p>
-            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
-          </div>
-        </article>
-        <article class="product">
-          <div class="product-media">
-            <a class="product-link" href="#"><img class="img-slick" src="foto's/slick_pomade.png" alt="Slick Pomade" loading="lazy"><img class="product-hover hover-slick" src="foto's/slick_pomade1.png" alt="" loading="lazy"></a>
-            <button class="product-add" type="button" aria-label="Toevoegen aan mand: Slick Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
-          </div>
-          <div class="product-info">
-            <span class="product-number">02</span>
-            <h3 class="product-name">Slick Pomade</h3>
-            <p class="product-price">€ [prijs]</p>
-            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
-          </div>
-        </article>
-        <article class="product">
-          <div class="product-media">
-            <a class="product-link" href="#"><img class="img-curls" src="foto's/xplosive_curls1.png" alt="Xplosive Curls" loading="lazy"><img class="product-hover hover-curls" src="foto's/Xplosive_curls2.png" alt="" loading="lazy"></a>
-            <button class="product-add" type="button" aria-label="Toevoegen aan mand: Xplosive Curls">Toevoegen aan mand <span aria-hidden="true">+</span></button>
-          </div>
-          <div class="product-info">
-            <span class="product-number">03</span>
-            <h3 class="product-name">Xplosive Curls</h3>
-            <p class="product-price">€ [prijs]</p>
-            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
-          </div>
-        </article>
-        <article class="product">
-          <div class="product-media">
-            <a class="product-link" href="#"><img class="img-oil" src="foto's/face&amp;beard_oil1.png" alt="Face &amp; Beard Oil" loading="lazy"><img class="product-hover hover-oil" src="foto's/face&amp;beard_oil2.png" alt="" loading="lazy"></a>
-            <button class="product-add" type="button" aria-label="Toevoegen aan mand: Face &amp; Beard Oil">Toevoegen aan mand <span aria-hidden="true">+</span></button>
-          </div>
-          <div class="product-info">
-            <span class="product-number">04</span>
-            <h3 class="product-name">Face &amp; Beard Oil</h3>
-            <p class="product-price">€ [prijs]</p>
-            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
-          </div>
-        </article>
+        <div class="product-grid">
+          <article class="product" data-category="haar styling">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-hybrid" src="foto's/hybrid_pomade1.png" alt="Hybrid Pomade" loading="lazy"><img class="product-hover hover-hybrid" src="foto's/Hybrid_Pomade.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Hybrid Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">01</span>
+              <h3 class="product-name">Hybrid Pomade</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+          <article class="product" data-category="haar styling">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-slick" src="foto's/slick_pomade.png" alt="Slick Pomade" loading="lazy"><img class="product-hover hover-slick" src="foto's/slick_pomade1.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Slick Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">02</span>
+              <h3 class="product-name">Slick Pomade</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+          <article class="product" data-category="haar">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-curls" src="foto's/xplosive_curls1.png" alt="Xplosive Curls" loading="lazy"><img class="product-hover hover-curls" src="foto's/Xplosive_curls2.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Xplosive Curls">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">03</span>
+              <h3 class="product-name">Xplosive Curls</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Haarverzorging — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+          <article class="product" data-category="baard">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-oil" src="foto's/face&amp;beard_oil1.png" alt="Face &amp; Beard Oil" loading="lazy"><img class="product-hover hover-oil" src="foto's/face&amp;beard_oil2.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Face &amp; Beard Oil">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">04</span>
+              <h3 class="product-name">Face &amp; Beard Oil</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Baardverzorging — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+          <article class="product" data-category="haar styling">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-heavy" src="foto's/heavy_duty_clay_wax1.png" alt="Heavy Duty Clay Wax" loading="lazy"><img class="product-hover" src="foto's/heavy_duty_clay_wax2.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Heavy Duty Clay Wax">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">05</span>
+              <h3 class="product-name">Heavy Duty Clay Wax</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+          <article class="product" data-category="haar">
+            <div class="product-media">
+              <a class="product-link" href="#"><img class="img-dust" src="foto's/dirty_dust1.png" alt="Dirty Dust" loading="lazy"><img class="product-hover" src="foto's/Dirty_Dust2.png" alt="" loading="lazy"></a>
+              <button class="product-add" type="button" aria-label="Toevoegen aan mand: Dirty Dust">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+            </div>
+            <div class="product-info">
+              <span class="product-number">06</span>
+              <h3 class="product-name">Dirty Dust</h3>
+              <p class="product-price">€ [prijs]</p>
+              <p class="product-meta">Haarverzorging — 100 ml / 3.5 oz</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -253,7 +277,10 @@
 
     <!-- Sectie 6: branding -->
     <section class="banner">
-      <img class="banner-image" src="foto's/model1_pose2.png" alt="Man in een donker jasje bij een stenen pilaar" loading="lazy">
+      <div class="banner-media">
+        <img class="banner-image" src="foto's/model1_pose2.png" alt="Man in een donker jasje bij een stenen pilaar" loading="lazy">
+        <div class="banner-shade"></div>
+      </div>
       <p class="story-side"><span>NoChic</span><i></i><span>06</span></p>
 
       <div class="banner-copy">
@@ -263,7 +290,10 @@
         </a>
       </div>
 
-      <h2 class="banner-title display">Inspired by nature.<br><span>Made for men.</span></h2>
+      <h2 class="banner-title display">
+        <span class="banner-line">Inspired by nature.</span>
+        <span class="banner-line banner-line-gold">Made for men.</span>
+      </h2>
     </section>
   </main>
 
@@ -308,6 +338,8 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
