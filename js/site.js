@@ -57,6 +57,59 @@ document.querySelectorAll(".btn, .oil-cta, .product-add").forEach((button) => {
   }
 });
 
+// Productfoto's: een rond label "Bekijk" vervangt de muis. Touchscreens en de toetsenbordfocus houden de gewone kaart.
+if (hasMouse) {
+  const viewCursor = document.createElement("div");
+  viewCursor.className = "view-cursor";
+  viewCursor.setAttribute("aria-hidden", "true");
+  // GSAP beweegt de buitenkant, de CSS schaalt de binnenkant: GSAP zou anders de CSS-schaal overnemen.
+  viewCursor.innerHTML = "<span>Bekijk</span>";
+  document.body.append(viewCursor);
+  document.documentElement.classList.add("has-view-cursor");
+
+  const followOptions = { duration: 0.35, ease: "power3" };
+  const followX = window.gsap && !reduceMotion ? gsap.quickTo(viewCursor, "x", followOptions) : null;
+  const followY = window.gsap && !reduceMotion ? gsap.quickTo(viewCursor, "y", followOptions) : null;
+  let mouseX = null;
+  let mouseY = null;
+
+  function moveViewCursor(jump) {
+    if (!followX) {
+      viewCursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    } else if (jump) {
+      // Bij binnenkomst direct op de muis beginnen, anders vliegt het label door de pagina.
+      followX(mouseX, mouseX);
+      followY(mouseY, mouseY);
+    } else {
+      followX(mouseX);
+      followY(mouseY);
+    }
+  }
+
+  function updateViewCursor() {
+    if (mouseX === null) return;
+    const isOverProduct = Boolean(document.elementFromPoint(mouseX, mouseY)?.closest(".product-link"));
+    const wasVisible = viewCursor.classList.contains("is-visible");
+    if (isOverProduct) moveViewCursor(!wasVisible);
+    viewCursor.classList.toggle("is-visible", isOverProduct);
+  }
+
+  window.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse") return;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    updateViewCursor();
+  });
+
+  // Bij scrollen schuift de kaart onder een stilstaande muis door. Capture vangt ook de productstrook.
+  window.addEventListener("scroll", updateViewCursor, { capture: true, passive: true });
+
+  document.documentElement.addEventListener("pointerleave", () => {
+    mouseX = null;
+    viewCursor.classList.remove("is-visible");
+  });
+}
+
 // Header: weg bij omlaag scrollen, terug bij omhoog scrollen.
 const siteHeader = document.querySelector(".site-header");
 const HEADER_TOP_ZONE = 80; // binnen deze afstand van de bovenkant blijft de header altijd staan

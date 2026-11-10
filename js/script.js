@@ -18,8 +18,11 @@ const oilStage = document.querySelector(".oil-stage");
 const oilFace = document.querySelector(".oil-face");
 const oilBeard = document.querySelector(".oil-beard");
 const oilBottle = document.querySelector(".oil-bottle");
+const oilTopText = document.querySelectorAll(".oil-side, .oil-intro, .oil-benefits");
+const oilBottomText = document.querySelectorAll(".oil-text, .oil-buy");
 
 const OIL_SMOOTHING = 7; // hoger is sneller, lager is zachter
+const OIL_BOTTLE_TILT = 14; // graden die de fles aan het begin schuin staat
 let oilCurrent = 0;
 let oilTarget = 0;
 let oilFrame = null;
@@ -27,22 +30,33 @@ let oilLastTime = 0;
 
 // Afstand die nog over is voor een deel van de animatie: 1 aan het begin, 0 aan het eind.
 const remaining = (progress, from, to) => (1 - clamp((progress - from) / (to - from))) ** 2;
+const fadeIn = (progress, from, to) => clamp((progress - from) / (to - from));
 
+// Negatief zolang de sectie nog binnenschuift, zodat de tekst dan al kan infaden.
 function getOilTarget() {
   if (getComputedStyle(oilStage).position !== "sticky") return 1;
   const pinDistance = oil.offsetHeight - oilStage.offsetHeight;
-  return clamp(-oil.getBoundingClientRect().top / pinDistance);
+  return Math.max(Math.min(-oil.getBoundingClientRect().top / pinDistance, 1), -1);
 }
 
 function renderOil(progress) {
   // Op mobiel staan de woorden onder elkaar en moeten ze verder schuiven om buiten beeld te starten.
   const wordTravel = window.innerWidth <= 640 ? 105 : 65;
   const wordOffset = remaining(progress, 0, 0.65) * wordTravel;
-  const bottleOffset = remaining(progress, 0.15, 0.85) * 105;
+  const bottleLeft = remaining(progress, 0.15, 0.85);
+  const wordOpacity = fadeIn(progress, 0.1, 0.5);
+  const topTextOpacity = fadeIn(progress, -0.3, 0);
+  const bottomTextOpacity = fadeIn(progress, -0.05, 0.2);
 
   oilFace.style.transform = `translateX(${-wordOffset}vw)`;
   oilBeard.style.transform = `translateX(${wordOffset}vw)`;
-  oilBottle.style.translate = `0 ${bottleOffset}vh`;
+  oilFace.style.opacity = wordOpacity;
+  oilBeard.style.opacity = wordOpacity;
+  oilBottle.style.translate = `0 ${bottleLeft * 105}vh`;
+  oilBottle.style.setProperty("--tilt", `${bottleLeft * OIL_BOTTLE_TILT}deg`);
+  oilBottle.style.opacity = fadeIn(progress, 0.2, 0.55);
+  oilTopText.forEach((element) => { element.style.opacity = topTextOpacity; });
+  oilBottomText.forEach((element) => { element.style.opacity = bottomTextOpacity; });
 }
 
 function tickOil(now) {

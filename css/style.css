@@ -573,6 +573,45 @@ ul { list-style: none; }
 
 .product-link:focus-visible { outline-offset: -2px; }
 
+/* Rond label "Bekijk" dat de muis vervangt boven een productfoto. site.js maakt en beweegt het. */
+.has-view-cursor .product-link { cursor: none; }
+.product-grid.is-dragging .product-link { cursor: grabbing; }
+
+.view-cursor {
+  --size: max(84px, 8.6rem);
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  pointer-events: none;
+}
+
+.view-cursor span {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--button);
+  color: var(--off-white);
+  font: 400 max(10px, 1.1rem) var(--sans);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  scale: 0;
+  transition: scale .3s cubic-bezier(.33, 1, .68, 1);
+}
+
+.view-cursor.is-visible span { scale: 1; }
+
+/* Tijdens het slepen van de strook hoort de grijphand te zien. */
+body:has(.product-grid.is-dragging) .view-cursor span { scale: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .view-cursor span { transition: none; }
+}
+
 .product-media:hover img { scale: 1.04; }
 
 /* Tweede foto, verschijnt bij hover over de productfoto. */
@@ -946,8 +985,8 @@ ul { list-style: none; }
   width: calc(var(--u) * 544);
   max-width: none;
   filter: drop-shadow(0 calc(var(--u) * 28) calc(var(--u) * 40) rgba(70, 48, 22, .3));
-  transform: translateX(-50%);
-  will-change: translate;
+  transform: translateX(-50%) rotate(var(--tilt, 0deg));
+  will-change: translate, transform, opacity;
 }
 
 .oil-text {
