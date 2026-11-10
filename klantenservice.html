@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klantenservice | NoChic</title>
+  <meta name="description" content="Contact, verzending, retour en bestellingen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Hanken+Grotesk:wght@400;500&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/producten.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="foto's/logo.png" alt="NoChic"></a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a href="producten.html">Producten</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a class="is-active" href="klantenservice.html">Klantenservice</a>
+    </nav>
+
+    <div class="header-icons">
+      <a href="zoeken.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 5 5"/></svg>
+        <span class="header-label">Zoeken</span>
+      </a>
+      <a href="account.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M3.5 22v-2c0-3.5 3-5.5 8.5-5.5s8.5 2 8.5 5.5v2z"/></svg>
+        <span class="header-label">Account</span>
+      </a>
+      <a href="winkelmand.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="15.5" rx="1.5"/><path d="M8 10V5.5a4 4 0 0 1 8 0V10"/></svg>
+        <span class="header-label">Mand</span>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menu openen" aria-controls="main-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="shop">
+    <section class="shop-hero page-hero">
+      <p class="story-side"><span>Service</span><i></i><span>01</span></p>
+      <div class="shop-column">
+        <div class="shop-hero-copy">
+          <p class="oil-kicker"><em>I</em>Klantenservice</p>
+          <h1 class="page-title display">Vraag het <span>ons gerust.</span></h1>
+          <p class="page-lead">Staat je antwoord niet in de veelgestelde vragen? Neem dan contact met ons op.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="shop-column">
+        <ol class="values values-contact">
+          <li><span>E-mail</span><h3>[e-mailadres]</h3><p>[reactietijd]</p></li>
+          <li><span>Telefoon</span><h3>[telefoonnummer]</h3><p>[bereikbaar op]</p></li>
+          <li><span>Veelgestelde vragen</span><h3><a href="faq.html">Bekijk de FAQ</a></h3><p>Antwoorden op de meest gestelde vragen.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="page-section page-section-alt">
+      <div class="shop-column split">
+        <div>
+          <p class="oil-kicker"><em>II</em>Contact</p>
+          <h2 class="page-h2 display">Stuur een bericht.</h2>
+        </div>
+        <form class="form" data-demo-form>
+          <div class="field"><label for="c-naam">Naam</label><input id="c-naam" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-mail">E-mailadres</label><input id="c-mail" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="c-bericht">Bericht</label><textarea id="c-bericht" rows="4" required></textarea></div>
+          <button class="btn btn-hero" type="submit">Verstuur
+              <svg viewBox="0 0 28 14" aria-hidden="true"><path d="M1 7h25M20 1l6 6-6 6"/></svg>
+            </button>
+          <p class="form-note" role="status" hidden>Dit formulier is nog niet gekoppeld. Er is niets verzonden.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="page-section" id="verzending">
+      <div class="shop-column split">
+        <div>
+          <p class="oil-kicker"><em>III</em>Verzending &amp; retour</p>
+          <h2 class="page-h2 display">Goed om te weten.</h2>
+        </div>
+        <div class="prose">
+          <h3>Verzending</h3>
+          <p>[Levertijd, verzendkosten en landen waarnaar je verzendt]</p>
+          <h3>Retourneren</h3>
+          <p>[Retourtermijn, voorwaarden en hoe een klant retour meldt]</p>
+          <h3>Betalen</h3>
+          <p>Je betaalt met iDEAL, Bancontact, creditcard of PayPal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section page-section-alt" id="bestelling">
+      <div class="shop-column split">
+        <div>
+          <p class="oil-kicker"><em>IV</em>Bestelling volgen</p>
+          <h2 class="page-h2 display">Waar is mijn pakket?</h2>
+        </div>
+        <form class="form" data-demo-form>
+          <div class="field"><label for="b-nummer">Bestelnummer</label><input id="b-nummer" type="text" required></div>
+          <div class="field"><label for="b-mail">E-mailadres</label><input id="b-mail" type="email" autocomplete="email" required></div>
+          <button class="btn btn-hero" type="submit">Volg bestelling
+              <svg viewBox="0 0 28 14" aria-hidden="true"><path d="M1 7h25M20 1l6 6-6 6"/></svg>
+            </button>
+          <p class="form-note" role="status" hidden>Dit formulier is nog niet gekoppeld. Er is niets verzonden.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="foto's/logo.png" alt="NoChic" loading="lazy">
+        <p>Premium haircare &amp; grooming voor een verzorgde en krachtige look.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="producten.html">Alle producten</a></li>
+          <li><a href="producten.html?categorie=haar">Haar</a></li>
+          <li><a href="producten.html?categorie=baard">Baard</a></li>
+          <li><a href="#">Sets &amp; cadeaus</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Informatie</h3>
+        <ul>
+          <li><a href="over-ons.html">Over ons</a></li>
+          <li><a href="blog.html">Journaal</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="klantenservice.html#verzending">Verzending &amp; retour</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Hulp</h3>
+        <ul>
+          <li><a href="klantenservice.html">Klantenservice</a></li>
+          <li><a href="klantenservice.html#bestelling">Bestelling volgen</a></li>
+          <li><a href="#">Algemene voorwaarden</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© NoChic. Alle rechten voorbehouden.</span>
+      <span>iDEAL · Bancontact · Creditcard · PayPal</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="js/producten-data.js"></script>
+  <script src="js/mand.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

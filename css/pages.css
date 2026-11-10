@@ -1,0 +1,681 @@
+/* Gedeelde opmaak van de losse pagina's. Bouwt voort op style.css en producten.css. */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Intro */
+
+.page-hero .shop-hero-photo { height: calc(var(--u) * 420); }
+
+.page-title {
+  margin-top: calc(var(--u) * 24);
+  text-wrap: balance;
+  font-size: calc(var(--u) * 92);
+  line-height: 1.14;
+}
+
+.page-title span {
+  display: block;
+  margin-left: calc(var(--u) * 58);
+  color: #c8a76f;
+}
+
+.page-lead {
+  width: min(100%, max(calc(var(--u) * 480), 30em));
+  margin-top: calc(var(--u) * 28);
+  padding-top: calc(var(--u) * 24);
+  border-top: 1px solid rgba(242, 236, 227, .22);
+  color: #dcd6cd;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(14px, calc(var(--u) * 15));
+  line-height: 1.55;
+}
+
+/* Secties */
+
+.page-section { padding-block: calc(var(--u) * 110); }
+.page-section[hidden] { display: none; }
+.page-section-alt { background: var(--oil-bg); }
+
+.page-section .oil-kicker,
+.pdp .oil-kicker { font-size: max(10px, calc(var(--u) * 10.5)); }
+
+.page-h2 {
+  margin-top: calc(var(--u) * 14);
+  font-size: calc(var(--u) * 58);
+  line-height: 1.15;
+}
+
+.page-h3 {
+  font-family: var(--editorial);
+  font-size: max(22px, calc(var(--u) * 26));
+  font-weight: 400;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 460) 1fr;
+  gap: calc(var(--u) * 80);
+  align-items: start;
+}
+
+.prose {
+  color: #5d554b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(15px, calc(var(--u) * 16));
+  line-height: 1.7;
+}
+
+.prose p + p,
+.prose h3 + p { margin-top: .9em; }
+.prose p + h3,
+.prose p + h2 { margin-top: 1.8em; }
+
+.prose h2,
+.prose h3 {
+  color: #181411;
+  font-family: var(--editorial);
+  font-size: max(22px, calc(var(--u) * 26));
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.text-sign {
+  font-size: max(9px, calc(var(--u) * 9.5));
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1em;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 10));
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+
+.text-link:hover,
+.faq a:hover,
+.product-name a:hover { color: #7b5c29; }
+
+.text-link svg {
+  width: 2.1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: calc(var(--u) * 32) 0 0;
+  padding: 0;
+  border-top: 1px solid #c9bfb0;
+  list-style: none;
+}
+
+.values-contact { margin-top: 0; }
+
+.values li {
+  padding: calc(var(--u) * 28) calc(var(--u) * 32) calc(var(--u) * 8);
+  border-left: 1px solid #d8cfbf;
+}
+
+.values li:first-child { padding-left: 0; border-left: 0; }
+
+.values span {
+  color: #7b5c29;
+  font-family: var(--editorial);
+  font-size: max(13px, calc(var(--u) * 14));
+  font-style: italic;
+}
+
+.values h3 {
+  margin-top: calc(var(--u) * 30);
+  font-family: var(--editorial);
+  font-size: max(21px, calc(var(--u) * 25));
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.values h3 a:hover { color: #7b5c29; }
+
+.values p {
+  margin-top: calc(var(--u) * 10);
+  color: #5d554b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(14px, calc(var(--u) * 14.5));
+  line-height: 1.55;
+}
+
+/* Formulieren */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: max(18px, calc(var(--u) * 22));
+}
+
+.field { width: 100%; }
+
+.field label {
+  display: block;
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 10));
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.field input,
+.field textarea {
+  display: block;
+  width: 100%;
+  padding: .7em 0;
+  border: 0;
+  border-bottom: 1px solid #b9ae9d;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: #181411;
+  font: 400 max(16px, calc(var(--u) * 16)) "Hanken Grotesk", var(--sans);
+  resize: vertical;
+  transition: border-color .2s;
+}
+
+.field input:focus,
+.field textarea:focus { border-color: #7b5c29; }
+
+.form-note {
+  color: #7b5c29;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(13px, calc(var(--u) * 13.5));
+}
+
+.form-note[hidden] { display: none; }
+
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--u) * 100);
+  align-items: start;
+}
+
+/* FAQ en uitklapblokken */
+
+.faq-group {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 340) 1fr;
+  gap: calc(var(--u) * 40);
+}
+
+.faq-group + .faq-group { margin-top: calc(var(--u) * 72); }
+
+.faq { border-bottom: 1px solid #d3cec5; }
+.faq-group > div > .faq:first-child { border-top: 1px solid #c9bfb0; }
+
+.faq summary {
+  position: relative;
+  padding: max(16px, calc(var(--u) * 19)) 2.4em max(16px, calc(var(--u) * 19)) 0;
+  font-family: var(--editorial);
+  font-size: max(18px, calc(var(--u) * 20));
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: #7b5c29;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: 1.1em;
+  transform: translateY(-50%);
+}
+
+.faq[open] summary::after { content: "−"; }
+
+.faq p {
+  padding-bottom: max(18px, calc(var(--u) * 22));
+  color: #5d554b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(15px, calc(var(--u) * 15));
+  line-height: 1.65;
+}
+
+.faq a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Blog */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--u) * 64) calc(var(--u) * 24);
+}
+
+.post-grid-two { grid-template-columns: repeat(2, 1fr); margin-top: calc(var(--u) * 32); }
+.post-grid[hidden],
+.shop-grid[hidden] { display: none; }
+
+.post-card-photo {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--tile);
+}
+
+.post-grid-two .post-card-photo { aspect-ratio: 3 / 2; }
+
+.post-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale .4s;
+}
+
+.post-card-photo:hover img { scale: 1.04; }
+
+.post-card-category {
+  margin-top: max(14px, calc(var(--u) * 18));
+  color: #7b5c29;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 9.5));
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.post-card-title {
+  margin-top: .4em;
+  font-family: var(--editorial);
+  font-size: max(21px, calc(var(--u) * 24));
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.post-card-title a:hover { color: #7b5c29; }
+
+.post-card-intro {
+  margin: .6em 0 1.2em;
+  color: #5d554b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(14px, calc(var(--u) * 14.5));
+  line-height: 1.55;
+}
+
+.article { padding-block: 0 calc(var(--u) * 110); }
+.article[hidden] { display: none; }
+
+.article-photo {
+  aspect-ratio: 21 / 9;
+  margin-top: calc(var(--u) * 64);
+  overflow: hidden;
+}
+
+.article-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-body {
+  width: min(100%, calc(var(--u) * 700));
+  margin: calc(var(--u) * 64) 0 calc(var(--u) * 48) auto;
+}
+
+/* Productpagina */
+
+.pdp { padding: calc(var(--header-height) + var(--u) * 28) 0 calc(var(--u) * 110); }
+.pdp[hidden] { display: none; }
+
+.pdp-crumb {
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 10));
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.pdp-crumb a:hover { color: #7b5c29; }
+
+.pdp-grid {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 590) 1fr;
+  gap: calc(var(--u) * 64);
+  align-items: start;
+  margin-top: calc(var(--u) * 24);
+}
+
+.pdp-gallery {
+  display: grid;
+  gap: calc(var(--u) * 16);
+}
+
+.pdp-scene {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--tile);
+}
+
+.pdp-scene img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-info {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.pdp-kicker {
+  color: #7b5c29;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 10));
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.pdp-name {
+  margin-top: max(14px, calc(var(--u) * 14));
+  font-size: calc(var(--u) * 58);
+  line-height: 1.12;
+}
+
+.pdp-price {
+  margin-top: calc(var(--u) * 14);
+  font-family: var(--editorial);
+  font-size: max(21px, calc(var(--u) * 24));
+}
+
+.pdp-meta {
+  margin-top: .3em;
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(10px, calc(var(--u) * 10));
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.pdp-description {
+  margin-top: calc(var(--u) * 24);
+  color: #5d554b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(15px, calc(var(--u) * 15.5));
+  line-height: 1.65;
+}
+
+.pdp-buy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: calc(var(--u) * 28) 0 calc(var(--u) * 24);
+}
+
+.pdp-buy .btn-hero { flex: 1; min-width: 190px; }
+.pdp-info .faq:first-of-type { border-top: 1px solid #c9bfb0; }
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  height: max(40px, calc(var(--u) * 41));
+  border: 1px solid #b9ae9d;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: 14px;
+}
+
+.qty button {
+  width: 34px;
+  height: 100%;
+  border: 0;
+  background: none;
+  color: #181411;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.qty button:hover { color: #7b5c29; }
+
+.qty span,
+.qty input {
+  width: 30px;
+  border: 0;
+  background: none;
+  color: #181411;
+  font: inherit;
+  text-align: center;
+  appearance: textfield;
+}
+
+.qty input::-webkit-outer-spin-button,
+.qty input::-webkit-inner-spin-button { appearance: none; }
+
+/* Winkelmand */
+
+.cart-empty[hidden],
+.cart-filled[hidden] { display: none; }
+
+.cart-empty .prose { margin: 1em 0 1.6em; }
+
+.cart-filled {
+  display: grid;
+  grid-template-columns: 1fr calc(var(--u) * 340);
+  gap: calc(var(--u) * 64);
+  align-items: start;
+}
+
+.cart-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #c9bfb0;
+  list-style: none;
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: max(84px, calc(var(--u) * 110)) 1fr auto auto;
+  gap: calc(var(--u) * 24);
+  align-items: center;
+  padding-block: max(14px, calc(var(--u) * 18));
+  border-bottom: 1px solid #d3cec5;
+}
+
+.cart-thumb {
+  display: block;
+  aspect-ratio: 4 / 5;
+  background: var(--tile);
+}
+
+.cart-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8%;
+}
+
+.cart-row h2 {
+  font-family: var(--editorial);
+  font-size: max(19px, calc(var(--u) * 21));
+  font-weight: 400;
+}
+
+.cart-row h2 a:hover { color: #7b5c29; }
+
+.cart-row-text p,
+.cart-remove {
+  margin-top: .5em;
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(9px, calc(var(--u) * 9.5));
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.cart-remove {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.cart-row-price {
+  min-width: 5.5em;
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(13px, calc(var(--u) * 14));
+  text-align: right;
+}
+
+.cart-summary {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+  padding: max(20px, calc(var(--u) * 28));
+  background: var(--oil-bg);
+}
+
+.cart-summary .btn-hero { width: 100%; }
+
+.cart-summary dl {
+  width: 100%;
+  margin: 0;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(14px, calc(var(--u) * 14.5));
+}
+
+.cart-summary dl div {
+  display: flex;
+  justify-content: space-between;
+  padding-block: .5em;
+}
+
+.cart-summary dd { margin: 0; }
+
+.cart-summary .cart-summary-line {
+  margin-top: .6em;
+  padding-top: 1em;
+  border-top: 1px solid #c9bfb0;
+  font-family: var(--editorial);
+  font-size: 1.3em;
+}
+
+.cart-pay {
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(12px, calc(var(--u) * 12));
+}
+
+/* Reviews */
+
+.page-reviews { row-gap: calc(var(--u) * 48); margin-top: 0; border-top: 0; }
+.page-reviews .review:nth-child(3n + 1) { padding-left: 0; border-left: 0; }
+.page-reviews .review:nth-child(n) { border-top: 1px solid #c9bfb0; padding-right: calc(var(--u) * 24); }
+
+/* Zoeken */
+
+.search-form { margin-top: calc(var(--u) * 28); }
+
+.search-input {
+  width: 100%;
+  padding: .3em 0;
+  border: 0;
+  border-bottom: 1px solid rgba(242, 236, 227, .35);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: #f2ece3;
+  font: 400 max(26px, calc(var(--u) * 52)) var(--editorial);
+}
+
+.search-input::placeholder { color: rgba(242, 236, 227, .45); }
+.search-input:focus { border-color: #c8a76f; }
+
+.search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: calc(var(--u) * 24);
+}
+
+.search-chips button {
+  padding: .7em 1.2em;
+  border: 1px solid rgba(242, 236, 227, .3);
+  background: none;
+  color: #f2ece3;
+  font: 400 max(10px, calc(var(--u) * 10)) "Hanken Grotesk", var(--sans);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+
+.search-chips button:hover { border-color: #c8a76f; color: #c8a76f; }
+
+.search-status {
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
+  font-size: max(14px, calc(var(--u) * 15));
+}
+
+.search-products,
+.search-posts { padding-block: 0; margin-top: calc(var(--u) * 40); }
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .page-title { font-size: 7.4vw; }
+  .page-h2 { font-size: 5.6vw; }
+  .split, .faq-group { grid-template-columns: 1fr; gap: 2.4rem; }
+  .post-grid { grid-template-columns: repeat(2, 1fr); gap: 4rem 2rem; }
+  .pdp-grid { grid-template-columns: 1fr 1fr; gap: 3.2rem; }
+  .pdp-name { font-size: 5.6vw; }
+  .cart-filled { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+  .page-reviews { grid-template-columns: repeat(2, 1fr); }
+  .page-reviews .review:nth-child(n) { padding-left: 2rem; border-left: 1px solid #dfd6c8; }
+  .page-reviews .review:nth-child(2n + 1) { padding-left: 0; border-left: 0; }
+  .search-products, .search-posts { margin-top: 3.2rem; }
+}
+
+/* Mobiel */
+
+@media (max-width: 640px) {
+  .page-title { font-size: 12vw; }
+  .page-title span { margin-left: 3vw; }
+  .page-h2 { font-size: 9.4vw; }
+  .page-hero .shop-hero-photo { height: 74vw; }
+  .page-section { padding-block: 5.6rem; }
+  .values, .account-grid { grid-template-columns: 1fr; gap: 0; }
+  .account-grid { gap: 5.6rem; }
+  .values li, .values li:first-child { padding: 2rem 0; border-left: 0; }
+  .values li + li { border-top: 1px solid #d8cfbf; }
+  .values h3 { margin-top: 1.2rem; }
+  .post-grid, .post-grid-two { grid-template-columns: 1fr; gap: 4rem; }
+  .post-card-photo { aspect-ratio: 3 / 2; }
+  .article-photo { aspect-ratio: 3 / 2; }
+  .article-body { width: 100%; }
+  .pdp { padding-top: calc(var(--header-height) + 2rem); }
+  .pdp-grid { grid-template-columns: 1fr; }
+  .pdp-gallery { grid-template-columns: 1fr 1fr; }
+  .pdp-info { position: static; }
+  .pdp-name { font-size: 10.6vw; }
+  .cart-row { grid-template-columns: 84px 1fr auto; row-gap: .8rem; }
+  .cart-row-price { grid-column: 3; grid-row: 1; align-self: start; }
+  .cart-row .qty { grid-column: 2; grid-row: 2; justify-self: start; }
+  .page-reviews { grid-template-columns: 1fr; }
+  .page-reviews .review:nth-child(n) { padding: 2.4rem 0; border-left: 0; }
+}

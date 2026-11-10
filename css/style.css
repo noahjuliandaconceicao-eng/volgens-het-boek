@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Royal Signage";
-  src: url("assets/font/RoyalSignage-Rg.otf") format("opentype");
+  src: url("../assets/font/RoyalSignage-Rg.otf") format("opentype");
   font-display: swap;
 }
 
@@ -19,7 +19,7 @@
   --dark: #1a100b;
   --cream: #f1ebe1;
   --beige: #e5dccd;
-  --tile: #dcd0c0;
+  --tile: #dfd5c4;
   --gold: #c49a45;
   --button: #1d120b;
   --button-hover: #c29844;
@@ -116,44 +116,47 @@ ul { list-style: none; }
   .oil-cta { transition: none; }
 }
 
-/* Sectie 1: hero */
+/* Sectie 1: hero
+   --u is 1/1082 van de kolombreedte onder de header. De foto schuift zo dat het blik
+   precies onder de kop begint: het blik staat op 18vw van de bovenkant van de foto. */
 
 .hero {
-  --u: min(calc(100vw / 2000), calc(100vh / 1036));
+  --u: calc(var(--header-width) / 1082);
   --hero-edge: calc((100vw - var(--header-width)) / 2 - .25vw);
+  --title-bottom: calc(clamp(64px, 3.03vw, 77px) + var(--u) * 322);
   position: relative;
   height: 100vh;
+  height: 100svh;
   min-height: 60rem;
   overflow: hidden;
   background: #181411;
-  color: var(--off-white);
+  color: #f2ece3;
 }
 
 .hero-photo {
   position: absolute;
-  top: max(calc(var(--u) * 66), 64px);
-  right: calc(var(--hero-edge) + .25vw);
-  bottom: calc(var(--u) * 49);
-  left: calc(var(--hero-edge) + var(--u) * 633);
+  inset: 0;
   overflow: hidden;
+  will-change: clip-path;
 }
 
-/* De verplaatsing is een percentage van de foto zelf, dus de uitsnede blijft gelijk. */
 .hero-photo img {
   position: absolute;
-  top: 0;
+  top: calc(var(--title-bottom) - 18vw);
   left: 0;
-  width: auto;
+  width: 100%;
   max-width: none;
-  height: max(calc(var(--u) * 1357), 147%);
-  transform: translate(-54.7%, -17.4%);
+  height: auto;
+  -webkit-mask-image: linear-gradient(transparent, #000 24%);
+  mask-image: linear-gradient(transparent, #000 24%);
+  will-change: transform;
 }
 
 .hero-photo::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent 88%, #131110 96%);
+  background: linear-gradient(to top, #181411, rgba(24, 20, 17, .72) 16%, rgba(24, 20, 17, 0) 40%);
 }
 
 /* Donkere balk met een smalle kolom. Verdwijnt bij omlaag scrollen, komt terug bij omhoog scrollen.
@@ -209,7 +212,6 @@ ul { list-style: none; }
 .main-nav a:hover,
 .header-icons a:hover,
 .footer-col a:hover,
-.see-all:hover,
 .reviews-head a:hover { color: var(--gold); }
 
 .header-icons {
@@ -238,57 +240,57 @@ ul { list-style: none; }
 
 .menu-toggle { display: none; }
 
-/* Hero-teksten. Maten zijn afgeleid van --u, 1/2000 van een scherm van 2000 x 1036.
-   --hero-edge lijnt de teksten uit met het logo in de header. */
+/* Hero-teksten: --hero-edge lijnt ze uit met het logo in de header. */
 
 .hero-copy,
 .hero-side,
-.hero-scroll,
-.hero-caption { position: absolute; z-index: 1; }
+.hero-foot { position: absolute; z-index: 1; }
 
 .hero-copy {
-  bottom: calc(var(--u) * 51);
+  top: calc(clamp(64px, 3.03vw, 77px) + var(--u) * 28);
   left: var(--hero-edge);
-  color: #f2ece3;
+  width: var(--header-width);
 }
 
-.hero-eyebrow {
+.hero-copy .oil-kicker {
   color: #c8a76f;
-  font-size: max(9px, calc(var(--u) * 8.6));
-  font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  font-size: max(10px, calc(var(--u) * 10.5));
 }
 
-.hero-copy h1 {
-  margin-top: calc(var(--u) * 18);
-  font-size: calc(var(--u) * 119);
-  line-height: calc(var(--u) * 129);
+.hero-title {
+  margin-top: calc(var(--u) * 20);
+  font-size: calc(var(--u) * 92);
+  line-height: calc(var(--u) * 108);
   white-space: nowrap;
 }
 
-.hero-accent {
-  margin-left: calc(var(--u) * 167);
+.hero-line {
+  display: block;
+  will-change: transform, opacity;
+}
+
+.hero-line-gold {
   color: #c8a76f;
+  text-align: right;
 }
 
 .hero-foot {
+  bottom: calc(var(--u) * 44);
+  left: var(--hero-edge);
   display: flex;
   align-items: center;
-  width: calc(var(--u) * 504);
-  min-width: 420px;
-  margin-top: calc(var(--u) * 36);
-  padding-top: calc(var(--u) * 28);
-  border-top: 1px solid rgba(242, 236, 227, .22);
+  gap: calc(var(--u) * 36);
+  width: var(--header-width);
+  padding-top: calc(var(--u) * 24);
+  border-top: 1px solid rgba(242, 236, 227, .25);
   font-family: "Hanken Grotesk", var(--sans);
 }
 
-.hero-foot p {
+.hero-foot > p {
   flex: none;
-  width: max(calc(var(--u) * 247), 220px);
-  padding-right: calc(var(--u) * 30);
+  width: max(calc(var(--u) * 250), 210px);
   color: #dcd6cd;
-  font-size: max(12px, calc(var(--u) * 14.5));
+  font-size: max(12px, calc(var(--u) * 13.5));
   line-height: 1.45;
 }
 
@@ -335,23 +337,10 @@ ul { list-style: none; }
   opacity: .6;
 }
 
-.hero-scroll {
-  bottom: calc(var(--u) * 62);
-  left: calc(var(--hero-edge) + max(var(--u) * 568, 450px));
-  color: #cfcac2;
-  font-size: max(9px, calc(var(--u) * 8.5));
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-
 .hero-caption {
-  right: calc(var(--hero-edge) + .25vw + var(--u) * 13);
-  bottom: calc(var(--u) * 66);
   display: flex;
   gap: calc(var(--u) * 13);
-  padding-top: calc(var(--u) * 13);
-  border-top: 1px solid rgba(242, 236, 227, .25);
-  color: #f2ece3;
+  margin-left: auto;
 }
 
 .hero-caption-number {
@@ -361,9 +350,8 @@ ul { list-style: none; }
 }
 
 .hero-caption p {
-  font-family: "Hanken Grotesk", var(--sans);
-  font-size: max(11px, calc(var(--u) * 11.5));
   color: #cfcac2;
+  font-size: max(11px, calc(var(--u) * 11.5));
 }
 
 .hero-caption strong {
@@ -377,16 +365,22 @@ ul { list-style: none; }
 
 /* Sectie 2: producten */
 
+/* Maten zijn afgeleid van --u, 1/1785 van een scherm van 1785 x 1318. */
 .products {
-  --strip-left: 12.3rem;
-  --strip-right: 11.2rem;
-  --strip-top: 6.6rem;
-  --strip-bottom: 12rem;
-  --card-width: max(22.5vw, 260px);
-  --stage-text: 30rem; /* hoogte van alles behalve de foto in de vastgezette sectie */
+  --u: min(calc(100vw / 1785), calc(100vh / 1318));
+  --strip-left: 31.4vw;
+  --strip-right: calc(var(--u) * 30);
+  --strip-top: calc(var(--u) * 232);
+  --strip-bottom: calc(var(--u) * 120);
+  --strip-gap: calc(var(--u) * 30);
+  --intro-width: calc(var(--u) * 585);
+  --card-width: max(calc(var(--u) * 580), 260px);
+  --stage-text: 16rem; /* ruimte voor de tekst onder de foto in de vastgezette sectie */
+  background: #f2ece3;
 }
 
 .products-stage {
+  position: relative;
   padding: var(--strip-top) var(--strip-right) var(--strip-bottom) var(--strip-left);
 }
 
@@ -400,12 +394,12 @@ ul { list-style: none; }
   justify-content: center;
   height: 100vh;
   height: 100svh;
-  padding-block: 2.4rem;
+  padding-block: 0 calc(var(--u) * 16);
   overflow: clip;
 }
 
 .products.is-pinned .product-grid {
-  grid-auto-columns: min(var(--card-width), calc((100svh - var(--stage-text)) * .949));
+  grid-auto-columns: min(var(--card-width), calc((100svh - var(--stage-text)) * .8));
   width: max-content;
   margin-right: 0;
   overflow: visible;
@@ -414,62 +408,127 @@ ul { list-style: none; }
   will-change: transform;
 }
 
-.section-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+.products .story-side {
+  z-index: 2;
+  left: calc(var(--u) * 23);
+  font-size: max(9px, calc(var(--u) * 10));
 }
 
-.section-head h2 {
-  margin: .6rem 0 0 .3rem;
-  font-size: 5.65rem;
-  line-height: 7.4rem;
+.products .story-side i { height: calc(var(--u) * 40); }
+
+.products-intro {
+  padding-top: calc(var(--u) * 66);
+  color: #63574b;
+  font-family: "Hanken Grotesk", var(--sans);
 }
 
-.see-all {
-  font-size: 1rem;
-  letter-spacing: .3em;
-  white-space: nowrap;
-  margin-top: 3.1rem;
-  text-transform: uppercase;
+.products-intro .oil-kicker {
+  font-size: max(10px, calc(var(--u) * 11.6));
 }
 
-.see-all span { font-size: 1.6rem; line-height: 0; }
+.products-title {
+  margin-top: calc(var(--u) * 24.5);
+  color: #181411;
+  font-size: calc(var(--u) * 100);
+  line-height: calc(var(--u) * 115);
+}
+
+.products-title span {
+  display: block;
+  color: #7b5c29;
+}
 
 .tabs {
   display: flex;
-  gap: 7.4rem;
-  margin-top: 2.4rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--u) * 16);
+  margin-top: calc(var(--u) * 54.5);
 }
 
 .tabs button {
-  padding: 0;
+  position: relative;
+  padding: 0 0 0 max(18px, calc(var(--u) * 22));
   border: 0;
   background: none;
   color: inherit;
   font-family: inherit;
+  font-size: max(10px, calc(var(--u) * 11));
+  letter-spacing: .18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
+  transition: color .2s;
 }
 
-.tabs button {
-  padding-bottom: .8rem;
-  border-bottom: 1px solid transparent;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: .36em;
+.tabs button span {
+  color: #8d7347;
+  font-size: .8em;
+  letter-spacing: .1em;
+}
+
+.tabs button.is-active { color: #181411; }
+.tabs button:hover { color: #7b5c29; }
+
+.tabs button.is-active::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: max(10px, calc(var(--u) * 12));
+  height: 1px;
+  background: #7b5c29;
+}
+
+.products-hint {
+  display: flex;
+  align-items: center;
+  gap: 1.1em;
+  margin-top: calc(var(--u) * 319);
+  font-size: max(10px, calc(var(--u) * 11));
+  letter-spacing: .18em;
   text-transform: uppercase;
 }
 
-.tabs button.is-active { border-color: var(--ink); }
-.tabs button:hover { color: #8a6a2a; }
+.products-hint svg {
+  width: 1.2em;
+  height: .6em;
+  fill: none;
+  stroke: #b2a9a0;
+  stroke-width: 2;
+}
+
+.products-progress {
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--u) * 32);
+  left: calc(var(--strip-left) + var(--u) * 17);
+  height: 1px;
+  background: #d3cec5;
+}
+
+.products-progress span {
+  display: block;
+  height: 100%;
+  background: #181411;
+  transform-origin: 0 50%;
+}
+
+.products:not(.is-pinned) .products-progress { display: none; }
+
+.products.no-travel .products-progress,
+.products.no-travel .products-hint { visibility: hidden; }
 
 /* Horizontale rij die tot aan de schermranden doorloopt. Slepen met de muis staat in script.js. */
 .product-grid {
   display: grid;
+  grid-template-columns: var(--intro-width);
   grid-auto-columns: var(--card-width);
   grid-auto-flow: column;
-  gap: 2.6rem;
-  margin: 2.7rem calc(var(--strip-right) * -1) 0 calc(var(--strip-left) * -1);
+  align-items: start;
+  gap: var(--strip-gap);
+  margin: 0 calc(var(--strip-right) * -1) 0 calc(var(--strip-left) * -1);
   padding-inline: var(--strip-left) var(--strip-right);
   scroll-padding-inline: var(--strip-left);
   overflow-x: auto;
@@ -493,7 +552,7 @@ ul { list-style: none; }
 .product-media {
   position: relative;
   display: block;
-  aspect-ratio: 282 / 297;
+  aspect-ratio: 580 / 726;
   background: var(--tile);
   overflow: hidden;
 }
@@ -545,11 +604,11 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: max(34px, 3.6rem);
-  padding: 0 1.2rem;
+  height: max(34px, 7.7cqw);
+  padding: 0 max(12px, 3.5cqw);
   border: 0;
   background: #110f0d;
-  font: 400 max(9px, .9rem) var(--sans);
+  font: 400 max(9px, 1.65cqw) var(--sans);
   letter-spacing: .16em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -568,16 +627,16 @@ ul { list-style: none; }
   .product-add { transition: none; }
 }
 
-.hover-hybrid { object-position: 53% 50%; }
 .hover-curls { object-position: 50% 50%; }
 .hover-oil { object-position: 77% 50%; }
 
-.img-hybrid { width: 88%; }
-.img-slick { width: 79%; top: 45% !important; }
-.img-curls { width: 70%; }
-.img-oil { width: 61%; top: 56% !important; }
-.img-heavy { width: 82%; }
-.img-dust { width: 66%; }
+.img-hybrid { width: 85%; }
+.product-media .img-hybrid { top: 46%; }
+.img-slick { width: 82%; }
+.img-curls { width: 76%; }
+.img-oil { width: 70%; }
+.img-heavy { width: 85%; }
+.img-dust { width: 72%; }
 
 /* Tekst onder de foto. De maten groeien mee met de kaart (cqw) en hebben een leesbaar minimum. */
 .product-info {
@@ -1189,13 +1248,14 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   html { font-size: 10px; }
 
-  .hero { --u: min(calc(100vw / 1100), .775px); --hero-edge: 3.2rem; height: 106rem; min-height: 0; }
-  .hero-side, .hero-scroll, .hero-caption { display: none; }
-  .hero-photo { top: auto; right: 0; bottom: 0; left: 0; height: 46rem; }
-  .hero-photo img { position: static; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; transform: none; }
-  .hero-photo::after { background: linear-gradient(#181411, transparent 30%); }
-  .hero-copy { top: 11rem; bottom: auto; }
 
+  .hero { --u: calc(100vw / 1100); --hero-edge: 3.2rem; --title-bottom: 23rem; height: max(96rem, 100svh); min-height: 0; }
+  .hero-side, .hero-caption { display: none; }
+  .hero-photo { top: 21rem; bottom: 0; }
+  .hero-photo img { position: static; height: 100%; object-fit: cover; object-position: 62% 50%; -webkit-mask-image: linear-gradient(transparent, #000 16%); mask-image: linear-gradient(transparent, #000 16%); }
+  .hero-copy { top: 10rem; width: calc(100vw - 6.4rem); }
+  .hero-title { font-size: 6.7vw; line-height: 1.2; }
+  .hero-foot { bottom: 3.2rem; width: calc(100vw - 6.4rem); gap: 2.4rem; padding-top: 2rem; }
   .site-header { padding-inline: 2.4rem; }
 
   .main-nav {
@@ -1242,10 +1302,7 @@ ul { list-style: none; }
   }
 
 
-  .products { --strip-left: 3.2rem; --strip-right: 3.2rem; --strip-top: 6rem; --strip-bottom: 6rem; --card-width: 40vw; }
-  .section-head h2 { margin-left: 0; font-size: 4.4rem; }
-  .tabs { gap: 2.4rem 3.2rem; flex-wrap: wrap; }
-  .product-grid { gap: 2rem; }
+  .products { --u: min(calc(100vw / 1100), .8px); --strip-left: 3.2rem; --strip-right: 3.2rem; --strip-top: 6rem; --strip-bottom: 6rem; --strip-gap: 2rem; --intro-width: 46vw; --card-width: 52vw; --stage-text: 14rem; }
 
   .story { padding: 6.4rem 3.2rem; }
   .story-side { display: none; }
@@ -1334,26 +1391,23 @@ ul { list-style: none; }
 /* Mobiel */
 
 @media (max-width: 640px) {
-  .hero { --u: calc(100vw / 800); --hero-edge: 1.6rem; height: 92rem; }
-  .hero-photo { height: 36rem; }
 
+  .hero { --hero-edge: 1.6rem; height: max(74rem, 100svh); }
+  .hero-photo { top: 22rem; bottom: 16rem; }
+  .hero-photo::after { background: linear-gradient(to top, #181411, rgba(24, 20, 17, 0) 26%); }
+  .hero-copy { top: 9.6rem; width: calc(100vw - 3.2rem); }
+  .hero-title { font-size: 10.4vw; line-height: 1.14; white-space: normal; }
+  .hero-line-gold { margin-left: 8vw; text-align: left; text-wrap: balance; }
+  .hero-foot { bottom: 2.4rem; width: calc(100vw - 3.2rem); flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+  .hero-foot > p { width: auto; font-size: 1.4rem; }
+  .btn-hero { width: 100%; max-width: 29rem; height: 4.6rem; font-size: 1.1rem; }
   .site-header { padding-inline: 1.6rem; }
   .header-icons svg { display: block; }
   .header-label { display: none; }
   .header-icons a { letter-spacing: 0; }
-  .hero-copy { top: 10.4rem; right: 1.6rem; }
-  .hero-foot { flex-direction: column; align-items: flex-start; gap: 1.6rem; width: auto; min-width: 0; padding-top: 2rem; }
-  .hero-foot p { width: auto; padding-right: 0; font-size: 1.4rem; }
-  .btn-hero { width: 100%; max-width: 29rem; height: 4.6rem; font-size: 1.1rem; }
 
-  .products { --strip-left: 1.6rem; --strip-right: 1.6rem; --strip-top: 4.8rem; --strip-bottom: 4.8rem; --card-width: 68vw; --stage-text: 33rem; }
-  .section-head { flex-direction: column; gap: .4rem; }
-  .see-all { margin-top: 0; }
-  .section-head h2 { font-size: 3.4rem; line-height: 5rem; }
-  .tabs { gap: 1.2rem 2rem; }
-  .tabs button { letter-spacing: .18em; }
+  .products { --strip-left: 1.6rem; --strip-right: 1.6rem; --strip-top: 4.8rem; --strip-bottom: 4.8rem; --strip-gap: 1.2rem; --u: calc(100vw / 640); --intro-width: 86vw; --card-width: 78vw; --stage-text: 15rem; }
   .product-add { padding: 0 1rem; letter-spacing: .08em; }
-  .product-grid { gap: 1.2rem; }
 
   .story { padding: 4.8rem 1.6rem; }
   .story-title { font-size: 9.6vw; }

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zoeken | NoChic</title>
+  <meta name="description" content="Zoek in de producten en artikelen van NoChic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Hanken+Grotesk:wght@400;500&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/producten.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="foto's/logo.png" alt="NoChic"></a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a href="producten.html">Producten</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="klantenservice.html">Klantenservice</a>
+    </nav>
+
+    <div class="header-icons">
+      <a href="zoeken.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 5 5"/></svg>
+        <span class="header-label">Zoeken</span>
+      </a>
+      <a href="account.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M3.5 22v-2c0-3.5 3-5.5 8.5-5.5s8.5 2 8.5 5.5v2z"/></svg>
+        <span class="header-label">Account</span>
+      </a>
+      <a href="winkelmand.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="15.5" rx="1.5"/><path d="M8 10V5.5a4 4 0 0 1 8 0V10"/></svg>
+        <span class="header-label">Mand</span>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menu openen" aria-controls="main-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="shop">
+    <section class="shop-hero page-hero">
+      <p class="story-side"><span>Zoeken</span><i></i><span>01</span></p>
+      <div class="shop-column">
+        <div class="shop-hero-copy">
+          <p class="oil-kicker"><em>I</em>Zoeken</p>
+          <form class="search-form" role="search">
+            <label class="visually-hidden" for="zoekterm">Zoekterm</label>
+            <input id="zoekterm" class="search-input" type="search" placeholder="Waar ben je naar op zoek?" autocomplete="off">
+          </form>
+          <div class="search-chips">
+            <button type="button" data-term="pomade">Pomade</button>
+            <button type="button" data-term="baard">Baard</button>
+            <button type="button" data-term="styling">Styling</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="shop-column">
+        <p class="search-status" role="status"></p>
+        <div class="shop-grid search-products" hidden></div>
+        <div class="post-grid search-posts" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="foto's/logo.png" alt="NoChic" loading="lazy">
+        <p>Premium haircare &amp; grooming voor een verzorgde en krachtige look.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="producten.html">Alle producten</a></li>
+          <li><a href="producten.html?categorie=haar">Haar</a></li>
+          <li><a href="producten.html?categorie=baard">Baard</a></li>
+          <li><a href="#">Sets &amp; cadeaus</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Informatie</h3>
+        <ul>
+          <li><a href="over-ons.html">Over ons</a></li>
+          <li><a href="blog.html">Journaal</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="klantenservice.html#verzending">Verzending &amp; retour</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Hulp</h3>
+        <ul>
+          <li><a href="klantenservice.html">Klantenservice</a></li>
+          <li><a href="klantenservice.html#bestelling">Bestelling volgen</a></li>
+          <li><a href="#">Algemene voorwaarden</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© NoChic. Alle rechten voorbehouden.</span>
+      <span>iDEAL · Bancontact · Creditcard · PayPal</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="js/producten-data.js"></script>
+  <script src="js/mand.js"></script>
+  <script src="js/artikelen-data.js"></script>
+  <script src="js/zoeken.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

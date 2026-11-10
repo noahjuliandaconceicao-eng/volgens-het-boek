@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Producten | NoChic</title>
+  <meta name="description" content="De volledige NoChic collectie voor haar en baard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Hanken+Grotesk:wght@400;500&family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/producten.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="foto's/logo.png" alt="NoChic"></a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a class="is-active" href="producten.html">Producten</a>
+      <a href="over-ons.html">Over ons</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="klantenservice.html">Klantenservice</a>
+    </nav>
+
+    <div class="header-icons">
+      <a href="zoeken.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 5 5"/></svg>
+        <span class="header-label">Zoeken</span>
+      </a>
+      <a href="account.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M3.5 22v-2c0-3.5 3-5.5 8.5-5.5s8.5 2 8.5 5.5v2z"/></svg>
+        <span class="header-label">Account</span>
+      </a>
+      <a href="winkelmand.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="15.5" rx="1.5"/><path d="M8 10V5.5a4 4 0 0 1 8 0V10"/></svg>
+        <span class="header-label">Mand</span>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menu openen" aria-controls="main-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="shop">
+    <!-- Intro -->
+    <section class="shop-hero">
+      <p class="story-side"><span>Collectie</span><i></i><span>01</span></p>
+
+      <div class="shop-column shop-hero-grid">
+        <div class="shop-hero-copy">
+          <p class="oil-kicker"><em>II</em>De collectie</p>
+          <h1 class="shop-title display">Zes formules, <span>één standaard.</span></h1>
+          <div class="shop-hero-foot">
+            <p>Professionele verzorgingsproducten voor een verzorgde en krachtige look.</p>
+            <p class="shop-hero-scroll">Scroll</p>
+          </div>
+        </div>
+        <div class="shop-hero-photo"><img src="foto's/Pomade.png" alt="Een veeg pomade tussen houtkrullen"></div>
+      </div>
+    </section>
+
+    <!-- Producten met filter -->
+    <section class="shop-products" id="producten">
+      <div class="shop-filter">
+        <div class="shop-column shop-filter-inner">
+          <nav class="tabs" aria-label="Productcategorieën">
+            <button class="is-active" type="button" data-filter="alle" aria-pressed="true">Alle producten <span>06</span></button>
+            <button type="button" data-filter="haar" aria-pressed="false">Haarverzorging <span>05</span></button>
+            <button type="button" data-filter="styling" aria-pressed="false">Styling <span>03</span></button>
+            <button type="button" data-filter="baard" aria-pressed="false">Baardverzorging <span>01</span></button>
+          </nav>
+          <p class="shop-count" aria-live="polite">6 producten</p>
+        </div>
+      </div>
+
+      <div class="shop-column shop-grid">
+        <article class="product" data-category="haar styling">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=hybrid-pomade"><img class="img-hybrid" src="foto's/hybrid_pomade1.png" alt="Hybrid Pomade" loading="lazy"><img class="product-hover" src="foto's/hybrid_pomade3.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="hybrid-pomade" aria-label="Toevoegen aan mand: Hybrid Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">01</span>
+            <h3 class="product-name"><a href="product.html?p=hybrid-pomade">Hybrid Pomade</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+        <article class="product" data-category="haar styling">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=slick-pomade"><img class="img-slick" src="foto's/slick_pomade.png" alt="Slick Pomade" loading="lazy"><img class="product-hover hover-slick" src="foto's/slick_pomade1.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="slick-pomade" aria-label="Toevoegen aan mand: Slick Pomade">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">02</span>
+            <h3 class="product-name"><a href="product.html?p=slick-pomade">Slick Pomade</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+        <article class="product" data-category="haar">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=xplosive-curls"><img class="img-curls" src="foto's/xplosive_curls1.png" alt="Xplosive Curls" loading="lazy"><img class="product-hover hover-curls" src="foto's/Xplosive_curls2.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="xplosive-curls" aria-label="Toevoegen aan mand: Xplosive Curls">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">03</span>
+            <h3 class="product-name"><a href="product.html?p=xplosive-curls">Xplosive Curls</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Haarverzorging — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+        <article class="product" data-category="baard">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=face-beard-oil"><img class="img-oil" src="foto's/face&amp;beard_oil1.png" alt="Face &amp; Beard Oil" loading="lazy"><img class="product-hover hover-oil" src="foto's/face&amp;beard_oil2.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="face-beard-oil" aria-label="Toevoegen aan mand: Face &amp; Beard Oil">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">04</span>
+            <h3 class="product-name"><a href="product.html?p=face-beard-oil">Face &amp; Beard Oil</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Baardverzorging — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+        <article class="product" data-category="haar styling">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=heavy-duty-clay-wax"><img class="img-heavy" src="foto's/heavy_duty_clay_wax1.png" alt="Heavy Duty Clay Wax" loading="lazy"><img class="product-hover" src="foto's/heavy_duty_clay_wax2.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="heavy-duty-clay-wax" aria-label="Toevoegen aan mand: Heavy Duty Clay Wax">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">05</span>
+            <h3 class="product-name"><a href="product.html?p=heavy-duty-clay-wax">Heavy Duty Clay Wax</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Styling — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+        <article class="product" data-category="haar">
+          <div class="product-media">
+            <a class="product-link" href="product.html?p=dirty-dust"><img class="img-dust" src="foto's/dirty_dust1.png" alt="Dirty Dust" loading="lazy"><img class="product-hover" src="foto's/Dirty_Dust2.png" alt="" loading="lazy"></a>
+            <button class="product-add" type="button" data-product="dirty-dust" aria-label="Toevoegen aan mand: Dirty Dust">Toevoegen aan mand <span aria-hidden="true">+</span></button>
+          </div>
+          <div class="product-info">
+            <span class="product-number">06</span>
+            <h3 class="product-name"><a href="product.html?p=dirty-dust">Dirty Dust</a></h3>
+            <p class="product-price">€ [prijs]</p>
+            <p class="product-meta">Haarverzorging — 100 ml / 3.5 oz</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Uitgelicht -->
+    <section class="shop-feature">
+      <div class="shop-column shop-feature-grid">
+        <div class="shop-feature-photo"><img src="foto's/oil.png" alt="Amberkleurige olie in een glazen schaal tussen hout en bladeren" loading="lazy"></div>
+        <div class="shop-feature-copy">
+          <p class="oil-kicker"><em>III</em>Uitgelicht</p>
+          <h2 class="shop-feature-title display">Face <span>&amp;</span> Beard Oil</h2>
+          <p class="shop-feature-text">Ervaar de verzachtende kracht van amandelolie, die je huid en baard tegelijk verzorgt. Trekt snel in, voelt niet vet en laat een subtiele, houtige geur achter.</p>
+          <ol class="shop-benefits">
+            <li><span>01</span>Apply with confidence</li>
+            <li><span>02</span>Absorb and protect</li>
+            <li><span>03</span>Layer with confidence</li>
+          </ol>
+          <a class="btn btn-hero" href="product.html?p=face-beard-oil">Bekijk product
+            <svg viewBox="0 0 28 14" aria-hidden="true"><path d="M1 7h25M20 1l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Afsluiting -->
+    <section class="banner">
+      <div class="banner-media">
+        <img class="banner-image" src="foto's/background1.png" alt="Werkplaats met houtkrullen en gereedschap" loading="lazy">
+        <div class="banner-shade"></div>
+      </div>
+      <p class="story-side"><span>NoChic</span><i></i><span>04</span></p>
+
+      <div class="banner-copy">
+        <p>Krachtige formules, geïnspireerd door de natuur en gemaakt voor mannen die weten wat ze willen.</p>
+        <a class="btn btn-hero" href="over-ons.html">Lees ons verhaal
+          <svg viewBox="0 0 28 14" aria-hidden="true"><path d="M1 7h25M20 1l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <h2 class="banner-title display">
+        <span class="banner-line">Inspired by nature.</span>
+        <span class="banner-line banner-line-gold">Made for men.</span>
+      </h2>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="foto's/logo.png" alt="NoChic" loading="lazy">
+        <p>Premium haircare &amp; grooming voor een verzorgde en krachtige look.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="producten.html">Alle producten</a></li>
+          <li><a href="producten.html?categorie=haar">Haar</a></li>
+          <li><a href="producten.html?categorie=baard">Baard</a></li>
+          <li><a href="#">Sets &amp; cadeaus</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Informatie</h3>
+        <ul>
+          <li><a href="over-ons.html">Over ons</a></li>
+          <li><a href="blog.html">Journaal</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="klantenservice.html#verzending">Verzending &amp; retour</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Hulp</h3>
+        <ul>
+          <li><a href="klantenservice.html">Klantenservice</a></li>
+          <li><a href="klantenservice.html#bestelling">Bestelling volgen</a></li>
+          <li><a href="#">Algemene voorwaarden</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© NoChic. Alle rechten voorbehouden.</span>
+      <span>iDEAL · Bancontact · Creditcard · PayPal</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script src="js/producten-data.js"></script>
+  <script src="js/mand.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/producten.js"></script>
+</body>
+</html>
