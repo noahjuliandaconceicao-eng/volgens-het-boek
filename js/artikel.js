@@ -4,7 +4,6 @@ const articleRoot = document.querySelector(".article");
 
 if (article) {
   document.title = `${article.title} ${article.gold} | NoChic`;
-  document.querySelector(".article-kicker").textContent = article.category;
   document.querySelector(".page-title").innerHTML = `${escapeHtml(article.title)} <span>${escapeHtml(article.gold)}</span>`;
   document.querySelector(".page-lead").textContent = article.intro;
   const photo = document.querySelector(".article-photo img");

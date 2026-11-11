@@ -9,7 +9,7 @@ if (!reduceMotion && window.gsap) {
     .fromTo(".hero-photo img", { scale: 1.2 }, { scale: 1 }, 0)
     .fromTo(".hero-line:first-child", { x: -heroLineOffset, opacity: 0 }, { x: 0, opacity: 1 }, 0.25)
     .fromTo(".hero-line-gold", { x: heroLineOffset, opacity: 0 }, { x: 0, opacity: 1 }, 0.25)
-    .fromTo(".hero-copy .oil-kicker, .hero-foot", { opacity: 0 }, { opacity: 1, duration: 0.9 }, 0.5);
+    .fromTo(".hero-foot", { opacity: 0 }, { opacity: 1, duration: 0.9 }, 0.5);
 }
 
 // Face & Beard Oil: de sectie staat vast terwijl de woorden en de fles naar binnen scrollen.

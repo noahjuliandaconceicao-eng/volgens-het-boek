@@ -42,9 +42,6 @@
 .page-section[hidden] { display: none; }
 .page-section-alt { background: var(--oil-bg); }
 
-.page-section .oil-kicker,
-.pdp .oil-kicker { font-size: max(10px, calc(var(--u) * 10.5)); }
-
 .page-h2 {
   margin-top: calc(var(--u) * 14);
   font-size: calc(var(--u) * 58);

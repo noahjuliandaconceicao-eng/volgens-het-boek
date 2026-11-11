@@ -38,7 +38,6 @@
   flex-direction: column;
 }
 
-.shop-hero .oil-kicker { color: #c8a76f; font-size: max(10px, calc(var(--u) * 10.5)); }
 
 .shop-title {
   margin-top: calc(var(--u) * 26);
@@ -171,8 +170,6 @@
   object-fit: cover;
   object-position: 45% 50%;
 }
-
-.shop-feature .oil-kicker { font-size: max(10px, calc(var(--u) * 10.5)); }
 
 .shop-feature-title {
   margin-top: calc(var(--u) * 16);
