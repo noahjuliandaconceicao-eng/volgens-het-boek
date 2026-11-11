@@ -959,7 +959,11 @@ body:has(.product-grid.is-dragging) .view-cursor span { scale: 0; }
   top: calc(50% - var(--u) * 278);
   left: 50%;
   width: calc(var(--u) * 544);
+  height: calc(var(--u) * 680);
   max-width: none;
+  scale: 1.15;
+  --poster-color: transparent;
+  background: transparent;
   filter: drop-shadow(0 calc(var(--u) * 28) calc(var(--u) * 40) rgba(70, 48, 22, .3));
   transform: translateX(-50%) rotate(var(--tilt, 0deg));
   will-change: translate, transform, opacity;
@@ -1376,6 +1380,7 @@ body:has(.product-grid.is-dragging) .view-cursor span { scale: 0; }
     top: 0;
     width: auto;
     height: 100%;
+    aspect-ratio: 1122 / 1402;
   }
 
   .oil-text { width: auto; font-size: 1.5rem; }

@@ -239,3 +239,31 @@ filterButtons.forEach((button) => {
     if (!button.classList.contains("is-active")) filterProducts(button);
   });
 });
+
+// Kleuren voor het 3D-flesje: de Blender-export bevat geen kleur voor glas, olie en druppel.
+const oilModel = document.querySelector("model-viewer.oil-bottle");
+if (oilModel) {
+  oilModel.addEventListener("load", () => {
+    const paint = (name, color, roughness, metallic = 0) => {
+      const material = oilModel.model?.getMaterialByName(name);
+      if (!material) return;
+      material.pbrMetallicRoughness.setBaseColorFactor(color);
+      material.pbrMetallicRoughness.setRoughnessFactor(roughness);
+      material.pbrMetallicRoughness.setMetallicFactor(metallic);
+    };
+    paint("Material.001", [0.018, 0.009, 0.004, 1], 0.06);  // donker amberglas flesje
+    paint("Material.002", [1.0, 0.62, 0.12, 1], 0.0);       // gouden olie
+    paint("water", [0.78, 0.58, 0.3, 1], 0.08);            // druppel
+
+    // Glazen tuitje van de druppelaar: echte transparantie zodat de pagina-achtergrond erdoor zichtbaar is.
+    // (Transmission laat in model-viewer alleen de 3D-scène zien, niet de HTML erachter.)
+    const pipette = oilModel.model?.getMaterialByName("Material.005");
+    if (pipette) {
+      pipette.transmission?.setTransmissionFactor(0);
+      pipette.setAlphaMode("BLEND");
+      pipette.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 0.12]);
+      pipette.pbrMetallicRoughness.setRoughnessFactor(0.02);
+      pipette.pbrMetallicRoughness.setMetallicFactor(0);
+    }
+  }, { once: true });
+}
