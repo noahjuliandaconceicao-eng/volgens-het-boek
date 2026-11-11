@@ -117,13 +117,14 @@ ul { list-style: none; }
 }
 
 /* Sectie 1: hero
-   --u is 1/1082 van de kolombreedte onder de header. De foto schuift zo dat het blik
-   precies onder de kop begint: het blik staat op 18vw van de bovenkant van de foto. */
+   --u is 1/1082 van de kolombreedte onder de header. De foto staat --photo-lift boven de onderkant
+   van de kop, zodat onderaan zoveel mogelijk van de producten te zien is. Groter is hoger. */
 
 .hero {
   --u: calc(var(--header-width) / 1082);
   --hero-edge: calc((100vw - var(--header-width)) / 2 - .25vw);
   --title-bottom: calc(clamp(64px, 3.03vw, 77px) + var(--u) * 322);
+  --photo-lift: 23vw;
   position: relative;
   height: 100vh;
   height: 100svh;
@@ -142,7 +143,7 @@ ul { list-style: none; }
 
 .hero-photo img {
   position: absolute;
-  top: calc(var(--title-bottom) - 18vw);
+  top: calc(var(--title-bottom) - var(--photo-lift));
   left: 0;
   width: 100%;
   max-width: none;
