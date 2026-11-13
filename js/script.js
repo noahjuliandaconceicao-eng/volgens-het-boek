@@ -240,6 +240,8 @@ filterButtons.forEach((button) => {
   });
 });
 
+const OIL_OPACITY = 0.45; // doorzichtigheid van de olie in het tuitje en de druppel (0 = onzichtbaar, 1 = dicht)
+
 // Kleuren voor het 3D-flesje: de Blender-export bevat geen kleur voor glas, olie en druppel.
 const oilModel = document.querySelector("model-viewer.oil-bottle");
 if (oilModel) {
@@ -253,7 +255,8 @@ if (oilModel) {
     };
     paint("Material.001", [0.018, 0.009, 0.004, 1], 0.06);  // donker amberglas flesje
     paint("Material.002", [1.0, 0.62, 0.12, 1], 0.0);       // gouden olie
-    paint("water", [0.78, 0.58, 0.3, 1], 0.08);            // druppel
+    paint("water", [0.78, 0.58, 0.3, OIL_OPACITY], 0.08);  // druppel
+    oilModel.model?.getMaterialByName("water")?.setAlphaMode("BLEND");
 
     // Glazen tuitje van de druppelaar: echte transparantie zodat de pagina-achtergrond erdoor zichtbaar is.
     // (Transmission laat in model-viewer alleen de 3D-scène zien, niet de HTML erachter.)
@@ -265,5 +268,86 @@ if (oilModel) {
       pipette.pbrMetallicRoughness.setRoughnessFactor(0.02);
       pipette.pbrMetallicRoughness.setMetallicFactor(0);
     }
+
+    setupPipetteLiquid(oilModel);
   }, { once: true });
+}
+
+// Vloeistof-effect: het oppervlak van de olie in het tuitje blijft waterpas (zwaartekracht = onderkant
+// van het scherm, inclusief de scroll-tilt) en klotst even na met een veer.
+function setupPipetteLiquid(viewer) {
+  const sceneKey = Object.getOwnPropertySymbols(viewer).find((s) => s.description === "scene");
+  const scene = sceneKey && viewer[sceneKey];
+  if (!scene) return;
+
+  let oil = null;
+  scene.traverse((object) => { if (object.isMesh && object.name === "pipette_oil") oil = object; });
+  if (!oil) return;
+
+  const FILL_POINT = [-0.1643, 2.9928, 0.8314]; // midden van het olie-oppervlak in het tuitje (model-coördinaten)
+  const STIFFNESS = 90; // hoger = sneller terug naar waterpas
+  const DAMPING = 6;    // lager = langer naklotsen
+
+  const uniforms = {
+    uOilPlane: { value: { x: 0, y: 1, z: 0, w: 1e9 } },
+    uOilNormalView: { value: { x: 0, y: 1, z: 0 } },
+  };
+
+  const material = oil.material;
+  material.side = 2; // DoubleSide: de binnenkant vormt het oppervlak waar de olie is afgesneden
+  material.transparent = true;
+  material.opacity = OIL_OPACITY;
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, uniforms);
+    shader.vertexShader = shader.vertexShader
+      .replace("#include <common>", "#include <common>\nvarying vec3 vOilWorld;")
+      .replace("#include <project_vertex>", "#include <project_vertex>\nvOilWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;");
+    shader.fragmentShader = shader.fragmentShader
+      .replace("#include <common>", "#include <common>\nvarying vec3 vOilWorld;\nuniform vec4 uOilPlane;\nuniform vec3 uOilNormalView;")
+      .replace("#include <clipping_planes_fragment>", "#include <clipping_planes_fragment>\nif (dot(uOilPlane.xyz, vOilWorld) > uOilPlane.w) discard;")
+      .replace("#include <normal_fragment_maps>", "#include <normal_fragment_maps>\nif (!gl_FrontFacing) normal = normalize(uOilNormalView);");
+  };
+  material.customProgramCacheKey = () => "pipette-oil-liquid";
+  material.needsUpdate = true;
+
+  const normal = [0, 1, 0];
+  const velocity = [0, 0, 0];
+  let started = false;
+  let last = performance.now();
+
+  function frame(now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    const camera = scene.getCamera?.() ?? scene.camera;
+
+    if (camera && !document.hidden) {
+      const cam = camera.matrixWorld.elements;
+      const tilt = (parseFloat(viewer.style.getPropertyValue("--tilt")) || 0) * Math.PI / 180;
+      // "Boven" op het scherm, teruggerekend naar 3D (de CSS-rotatie draait het hele beeld met de klok mee).
+      const target = [0, 1, 2].map((i) => Math.cos(tilt) * cam[4 + i] - Math.sin(tilt) * cam[i]);
+
+      if (!started) { normal.splice(0, 3, ...target); started = true; }
+      for (let i = 0; i < 3; i++) {
+        velocity[i] += ((target[i] - normal[i]) * STIFFNESS - velocity[i] * DAMPING) * dt;
+        normal[i] += velocity[i] * dt;
+      }
+      const len = Math.hypot(...normal) || 1;
+      const n = normal.map((v) => v / len);
+
+      const m = oil.matrixWorld.elements;
+      const [x, y, z] = FILL_POINT;
+      const p = [0, 1, 2].map((i) => m[i] * x + m[4 + i] * y + m[8 + i] * z + m[12 + i]);
+      Object.assign(uniforms.uOilPlane.value, { x: n[0], y: n[1], z: n[2], w: n[0] * p[0] + n[1] * p[1] + n[2] * p[2] });
+
+      const v = camera.matrixWorldInverse.elements;
+      Object.assign(uniforms.uOilNormalView.value, {
+        x: v[0] * n[0] + v[4] * n[1] + v[8] * n[2],
+        y: v[1] * n[0] + v[5] * n[1] + v[9] * n[2],
+        z: v[2] * n[0] + v[6] * n[1] + v[10] * n[2],
+      });
+      scene.queueRender?.();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 }
